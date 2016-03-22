@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatDataBaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ChatDataBaseEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Message" EntityType="ChatDataBaseModel.Message" />
+    <EntitySet Name="User" EntityType="ChatDataBaseModel.User" />
+    <EntitySet Name="UserMessage" EntityType="ChatDataBaseModel.UserMessage" />
+    <AssociationSet Name="FK_UserMessage_Message" Association="ChatDataBaseModel.FK_UserMessage_Message">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="UserMessage" EntitySet="UserMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMessage_User" Association="ChatDataBaseModel.FK_UserMessage_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserMessage" EntitySet="UserMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMessage_User1" Association="ChatDataBaseModel.FK_UserMessage_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserMessage" EntitySet="UserMessage" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Message1" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="true" />
+    <Property Name="RecDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="UserMessage" Relationship="ChatDataBaseModel.FK_UserMessage_Message" FromRole="Message" ToRole="UserMessage" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="FullName" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="IsOnline" Type="Boolean" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+    <Property Name="LastOnlineDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UserMessage" Relationship="ChatDataBaseModel.FK_UserMessage_User" FromRole="User" ToRole="UserMessage" />
+    <NavigationProperty Name="UserMessage1" Relationship="ChatDataBaseModel.FK_UserMessage_User1" FromRole="User" ToRole="UserMessage" />
+  </EntityType>
+  <EntityType Name="UserMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserSenderId" Type="Int32" Nullable="false" />
+    <Property Name="UserReceiverId" Type="Int32" />
+    <Property Name="MessageId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Message" Relationship="ChatDataBaseModel.FK_UserMessage_Message" FromRole="UserMessage" ToRole="Message" />
+    <NavigationProperty Name="User" Relationship="ChatDataBaseModel.FK_UserMessage_User" FromRole="UserMessage" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="ChatDataBaseModel.FK_UserMessage_User1" FromRole="UserMessage" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_UserMessage_Message">
+    <End Role="Message" Type="ChatDataBaseModel.Message" Multiplicity="1" />
+    <End Role="UserMessage" Type="ChatDataBaseModel.UserMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMessage_User">
+    <End Role="User" Type="ChatDataBaseModel.User" Multiplicity="1" />
+    <End Role="UserMessage" Type="ChatDataBaseModel.UserMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="UserSenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMessage_User1">
+    <End Role="User" Type="ChatDataBaseModel.User" Multiplicity="0..1" />
+    <End Role="UserMessage" Type="ChatDataBaseModel.UserMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="UserReceiverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

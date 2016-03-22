@@ -1,0 +1,46 @@
+﻿@model SimpleChat.Models.User
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h2>Login</h2>
+
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        //this  is for create form tag
+        @Html.AntiForgeryToken()          // this is for prevent CSRF attack
+        @Html.ValidationSummary(true)
+        if (@ViewBag.Message != null)
+        {
+        <div style="border: 1px solid red">
+            @ViewBag.Message
+        </div>
+        }
+        <table>
+            <tr>
+                <td>@Html.LabelFor(x => x.Name)</td>
+                <td>@Html.TextBoxFor(x => x.Name)</td>
+                <td>@Html.ValidationMessageFor(x => x.Name)</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Password)
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.Password)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Password)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

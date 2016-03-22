@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище ChatDataBaseModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Хранилище ChatDataBaseModelContainer">
+    <EntitySet Name="Message" EntityType="Хранилище ChatDataBaseModel.Message" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="Хранилище ChatDataBaseModel.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserMessage" EntityType="Хранилище ChatDataBaseModel.UserMessage" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UserMessage_Message" Association="Хранилище ChatDataBaseModel.FK_UserMessage_Message">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="UserMessage" EntitySet="UserMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMessage_User" Association="Хранилище ChatDataBaseModel.FK_UserMessage_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserMessage" EntitySet="UserMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMessage_User1" Association="Хранилище ChatDataBaseModel.FK_UserMessage_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserMessage" EntitySet="UserMessage" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="nchar" Nullable="false" MaxLength="250" />
+    <Property Name="RecDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="Password" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="FullName" Type="nchar" MaxLength="50" />
+    <Property Name="IsOnline" Type="bit" Nullable="false" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="LastOnlineDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserSenderId" Type="int" Nullable="false" />
+    <Property Name="UserReceiverId" Type="int" />
+    <Property Name="MessageId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_UserMessage_Message">
+    <End Role="Message" Type="Хранилище ChatDataBaseModel.Message" Multiplicity="1" />
+    <End Role="UserMessage" Type="Хранилище ChatDataBaseModel.UserMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMessage_User">
+    <End Role="User" Type="Хранилище ChatDataBaseModel.User" Multiplicity="1" />
+    <End Role="UserMessage" Type="Хранилище ChatDataBaseModel.UserMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="UserSenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMessage_User1">
+    <End Role="User" Type="Хранилище ChatDataBaseModel.User" Multiplicity="0..1" />
+    <End Role="UserMessage" Type="Хранилище ChatDataBaseModel.UserMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMessage">
+        <PropertyRef Name="UserReceiverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

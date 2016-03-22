@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+
+@if (Session["LogedUserFullname"] != null)
+{
+    <text>
+    Welcome @Session["LogedUserFullname"].ToString()
+    </text>
+}
+<br />
+<input type="button" value="Connect" id="connectButton" />
+<input type="button" value="Disconnect" id="disconnectButton" /><br />
+<br />
+User:
+    <input type="text" id="userInput" value="@Session["LogedUserFullname"].ToString()" />
+Private :<input type="text" id="privateInput" />
+Message :<input type="text" id="messageInput" />
+<input type="button" value="Send" id="sendButton" />
+
+<span id="status"></span>
+<div id="messagesLog"></div>
+
+<script>
+    var socket,
+        $txt = document.getElementById('message'),
+        $user = document.getElementById('userInput'),
+        $privateUser = document.getElementById('privateInput'),
+        $messages = document.getElementById('messageInput');
+
+    $(document).ready(function () {
+        $("#connectButton").click(function () {
+            socket = new WebSocket("ws://" + window.location.hostname + "/SimpleChat/Chat/MessagesProvider?clientIdentity=" + $user.value);
+
+            socket.onopen = function () {
+                $("#status").text("Connected.");
+                if (socket.readyState == WebSocket.OPEN) {
+                    socket.send(JSON.stringify(
+                        {
+                            UserName: $user.value,
+                            Message: "connected to chat."
+                        }));
+                }
+            };
+
+            socket.onmessage = function (event) {
+                $("#messagesLog").append(event.data + "<br />");
+            };
+
+            socket.onerror = function (event) {
+                $("#status").text(event.message);
+            };
+
+            socket.onclose = function () {
+                $("#status").text("Disconnected.");
+            };
+        });
+
+        $("#sendButton").click(function () {
+            if (socket.readyState == WebSocket.OPEN) {
+                socket.send(JSON.stringify(
+                    {
+                        UserName: $user.value,
+                        Message: "sent: " + $messages.value,
+                        UserReceiver: $privateUser.value
+                    }));
+            }
+            else {
+                $("#status").text("Connection is closed.");
+            }
+        });
+
+        $("#disconnectButton").click(function () {
+            socket.close();
+        });
+    })
+</script>
+
