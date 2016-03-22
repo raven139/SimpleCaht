@@ -11,6 +11,7 @@ namespace SimpleChat.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class User
     {
@@ -21,11 +22,29 @@ namespace SimpleChat.Models
         }
     
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Enter Chat name (Login)", AllowEmptyStrings = false)]
+        [Display(Name = "Chat name (Login): ")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Enter Password", AllowEmptyStrings = false)]
+        [DataType(DataType.Password)]
+        [StringLength(150, MinimumLength = 6)]
+        [Display(Name = "Password: ")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Enter Full name", AllowEmptyStrings = false)]
+        [Display(Name = "Full name: ")]
         public string FullName { get; set; }
+
         public bool IsOnline { get; set; }
+
+        [Required(ErrorMessage = "Enter Email Address", AllowEmptyStrings = false)]
+        [EmailAddress]
+        [StringLength(150)]
+        [Display(Name = "Email Address: ")]
         public string Email { get; set; }
+
         public Nullable<System.DateTime> LastOnlineDate { get; set; }
     
         public virtual ICollection<UserMessage> UserMessage { get; set; }

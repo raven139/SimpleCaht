@@ -37,3 +37,41 @@ C:\Users\sergiy\documents\visual studio 2012\Projects\SimpleChat\SimpleChat\bin\
 C:\Users\sergiy\documents\visual studio 2012\Projects\SimpleChat\SimpleChat\bin\EntityFramework.xml
 C:\Users\sergiy\documents\visual studio 2012\Projects\SimpleChat\SimpleChat\bin\ru\EntityFramework.resources.dll
 C:\Users\sergiy\documents\visual studio 2012\Projects\SimpleChat\SimpleChat\obj\Debug\SimpleChat.csprojResolveAssemblyReference.cache
+D:\[projects]\SimpleChat\SimpleChat\bin\SimpleChat.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\SimpleChat.pdb
+D:\[projects]\SimpleChat\SimpleChat\bin\EntityFramework.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\Microsoft.Web.Infrastructure.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\Newtonsoft.Json.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Net.Http.Formatting.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Helpers.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Http.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Http.WebHost.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Mvc.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Razor.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.WebPages.Deployment.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.WebPages.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.WebPages.Razor.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\EntityFramework.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\Newtonsoft.Json.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Net.Http.Formatting.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Helpers.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Http.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Http.WebHost.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Mvc.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.Razor.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.WebPages.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.WebPages.Deployment.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\System.Web.WebPages.Razor.xml
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\EntityFramework.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Net.Http.Formatting.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.Helpers.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.Http.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.Http.WebHost.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.Mvc.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.Razor.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.WebPages.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.WebPages.Deployment.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\bin\ru\System.Web.WebPages.Razor.resources.dll
+D:\[projects]\SimpleChat\SimpleChat\obj\Debug\SimpleChat.dll
+D:\[projects]\SimpleChat\SimpleChat\obj\Debug\SimpleChat.pdb

@@ -3,32 +3,42 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+
     <title>@ViewBag.Title</title>
+    <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Components/CSS/Custom.css" />
 </head>
 <body>
-    <div style="width: auto; background-color: aqua; text-align: right;">
-        @if (Request.IsAuthenticated)
-        {
-            <strong>@Html.Encode(User.Identity.Name)</strong>
-            @Html.ActionLink("Log Out", "Logout", "Account")
-        }
-        else
-        {
-            @Html.ActionLink("Register", "Register", "Account")
-            <span>| </span>
-            @Html.ActionLink("Log In", "Login", "Account")
-        }
-    </div>
-    <div>
-        @RenderBody()
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary wrapper">
+                <div class="panel-heading text-right">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <strong>@Html.Encode(User.Identity.Name)</strong>
+                        @Html.ActionLink("Log Out", "Logout", "Account", new { @class = "btn btn-danger" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Register", "Register", "Account", new { @class = "btn btn-info" })
+                        <span>&nbsp;</span>
+                        @Html.ActionLink("Log In", "Login", "Account", new { @class = "btn btn-success" })
+                    }
+                </div>
+
+                <div class="panel-body content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
