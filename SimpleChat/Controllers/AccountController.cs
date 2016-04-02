@@ -19,43 +19,7 @@ namespace SimpleChat.Controllers
         {
             return View();
         }
-
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(User user, string returnUrl)
-        {
-
-            var currentUser = context.User.Where(x => x.Name.Equals(user.Name) && x.Password.Equals(user.Password)).FirstOrDefault();
-            if (currentUser != null)
-            {
-                Session["LogedUserID"] = currentUser.Id.ToString();
-                Session["LogedUserFullname"] = currentUser.Name.ToString();
-                FormsAuthentication.SetAuthCookie(currentUser.Name, false);
-
-                return RedirectToAction("Index", "Chat");
-
-            }
-            else
-            {
-                ModelState.AddModelError("", "Login details are wrong.");
-            }
-
-            return View(user);
-        }
-
-        public ActionResult LogOut()
-        {
-            Session.Abandon();
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Account");
-        }
-
+        
         [HttpGet]
         public ActionResult Register()
         {
@@ -69,11 +33,21 @@ namespace SimpleChat.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    user.IsOnline = false;
+                    var isLogineAvalible = context.User.Where(x => x.ChatName == user.ChatName).FirstOrDefault();
 
-                    context.User.Add(user);
-                    context.SaveChanges();
-                    return RedirectToAction("Index", "Account");
+                    if (isLogineAvalible == null)
+                    {
+                        user.IsOnline = false;
+
+                        context.User.Add(user);
+                        context.SaveChanges();
+                        return RedirectToAction("Login", "Account");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "User is already exist.");
+                    }
+
                 }
                 else
                 {
@@ -94,6 +68,63 @@ namespace SimpleChat.Controllers
                 throw;
             }
             return View();
+        }
+
+        public ActionResult Login()
+        {
+            if (FormsAuthentication.CookiesSupported)
+            {
+                var authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                if (authCookie != null && Session["LogedUserID"] != null)
+                {
+                    return RedirectToAction("Index", "Chat");
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User user)
+        {
+
+            var currentUser = context.User.Where(x => x.ChatName.Equals(user.ChatName) && x.Password.Equals(user.Password)).FirstOrDefault();
+            if (currentUser != null)
+            {
+                currentUser.IsOnline = true;
+
+                context.SaveChanges();
+
+                Session["LogedUserID"] = currentUser.Id.ToString();
+                Session["LogedUserFullname"] = currentUser.FullName.ToString();
+                FormsAuthentication.SetAuthCookie(currentUser.ChatName, false);
+
+                return RedirectToAction("Index", "Chat");
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "Login details are wrong.");
+            }
+
+            return View(user);
+        }
+
+        public ActionResult LogOut()
+        {
+            if (Session["LogedUserID"] != null)
+            {
+                var currentUser = context.User.FirstOrDefault(x => x.Id == (int)Session["LogedUserID"]);
+                if (currentUser != null)
+                {
+                    currentUser.IsOnline = false;
+                    currentUser.LastOnlineDate = DateTime.Now;
+                }
+            }
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+
+            return RedirectToAction("Login", "Account");
         }
 
         //private bool IsValid(string email, string password)

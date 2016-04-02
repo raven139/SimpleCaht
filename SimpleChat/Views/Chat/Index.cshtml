@@ -2,8 +2,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="panel panel-default">
 
-@if (Session["LogedUserFullname"] != null)
+    <div class="panel-heading">
+       @if (Session["LogedUserFullname"] != null)
+       {
+        <text>
+            <h4>  Welcome <strong>@Session["LogedUserFullname"].ToString()</strong></h4>
+        </text>
+       }
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Users</div>
+                    <div class="panel-body panel-height" id="userPanelId">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Global chat</div>
+                    <div class="panel-body panel-height" id="messagesPanelId">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="privateMessaging" style="display: none;">
+            <div class="col-md-12">
+                Private message for <strong id="privateClient">ironballz</strong>.
+                <a href="" id="disablePrivateLink">Disable private messaging.</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <input type="text" id="inputId" class="form-control" />
+                <div id="errorMessageId" class="text-danger"></div>
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="sendButtonId" class="btn btn-info btn-block send-button"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@if (Session["LogedUserFullname"] != null)
 {
     <text>
     Welcome @Session["LogedUserFullname"].ToString()
@@ -20,7 +64,7 @@ Message :<input type="text" id="messageInput" />
 <input type="button" value="Send" id="sendButton" />
 
 <span id="status"></span>
-<div id="messagesLog"></div>
+<div id="messagesLog"></div>*@
 
 <script>
     var socket,

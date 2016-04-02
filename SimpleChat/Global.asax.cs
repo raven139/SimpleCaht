@@ -9,8 +9,6 @@ using System.Web.Security;
 
 namespace SimpleChat
 {
-    // Примечание: Инструкции по включению классического режима IIS6 или IIS7 
-    // см. по ссылке http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -45,9 +43,9 @@ namespace SimpleChat
                         string roles = string.Empty;
 
                         // Находим роль в базе данных
-                        using (SimpleChat.Models.ChatDataBaseEntities context = new Models.ChatDataBaseEntities())
+                        using (Models.ChatDataBaseEntities context = new Models.ChatDataBaseEntities())
                         {
-                            var user = context.User.SingleOrDefault(u => u.Name == username);
+                            var user = context.User.SingleOrDefault(u => u.ChatName == username);
 
                         }
 

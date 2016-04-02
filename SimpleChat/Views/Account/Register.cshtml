@@ -14,17 +14,17 @@
         </div>
         <div class="panel-body">
             <form class="form-group">
-
                 <div class="form-inline form-group">
                     <div class="form-group">
-                        <div class="editor-label">@Html.LabelFor(x => x.Email)</div>
+                        <div class="editor-label">
+                            @Html.LabelFor(x => x.ChatName)
+                        </div>
                         <div class="editor-field">
-                            @Html.TextBoxFor(x => x.Email, new { @type = "email", @class = "form-control", @placeholder = "Email" })
-                            <span class="text-danger">&nbsp;@Html.ValidationMessageFor(x => x.Email)</span>
+                            @Html.TextBoxFor(x => x.ChatName, new { @type = "text", @class = "form-control", @placeholder = "Login" })
+                            <span class="text-danger">&nbsp;@Html.ValidationMessageFor(x => x.ChatName)</span>
                         </div>
                     </div>
                 </div>
-
                 <div class="form-inline form-group">
                     <div class="form-group">
                         <div class="editor-label">
@@ -36,31 +36,25 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="form-inline form-group">
-                    <div class="form-group">
-                        <div class="editor-label">
-                            @Html.LabelFor(x => x.Name)
-                        </div>
-                        <div class="editor-field">
-                            @Html.TextBoxFor(x => x.Name, new { @type = "text", @class = "form-control", @placeholder = "Login" })
-                            <span class="text-danger">&nbsp;@Html.ValidationMessageFor(x => x.Name)</span>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="form-inline form-group">
                     <div class="form-group">
                         <div class="editor-label">@Html.LabelFor(x => x.FullName)</div>
-                        <div class="editor-field">@Html.TextBoxFor(x => x.FullName, new { @type = "text", @class = "form-control", @placeholder = "Full Name" })
+                        <div class="editor-field">
+                            @Html.TextBoxFor(x => x.FullName, new { @type = "text", @class = "form-control", @placeholder = "Full Name" })
                             <span class="text-danger">&nbsp;@Html.ValidationMessageFor(x => x.FullName)</span>
                         </div>
                     </div>
                 </div>
-
-
+                <div class="form-inline form-group">
+                    <div class="form-group">
+                        <div class="editor-label">@Html.LabelFor(x => x.Email)</div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(x => x.Email, new { @type = "email", @class = "form-control", @placeholder = "Email" })
+                            <span class="text-danger">&nbsp;@Html.ValidationMessageFor(x => x.Email)</span>
+                        </div>
+                    </div>
+                </div>
                 <input type="submit" class="btn btn-default" value="Register" />
-
             </form>
         </div>
     </div>

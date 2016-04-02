@@ -10,37 +10,46 @@
     {
         //this  is for create form tag
         @Html.AntiForgeryToken()          // this is for prevent CSRF attack
-        @Html.ValidationSummary(true)
+                                        @Html.ValidationSummary(true, "Check input data", new { @class = "alert alert-danger" })
         if (@ViewBag.Message != null)
         {
-        <div style="border: 1px solid red">
-            @ViewBag.Message
-        </div>
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
         }
-        <table>
-            <tr>
-                <td>@Html.LabelFor(x => x.Name)</td>
-                <td>@Html.TextBoxFor(x => x.Name)</td>
-                <td>@Html.ValidationMessageFor(x => x.Name)</td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.LabelFor(a => a.Password)
-                </td>
-                <td>
-                    @Html.PasswordFor(a => a.Password)
-                </td>
-                <td>
-                    @Html.ValidationMessageFor(a => a.Password)
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Login" />
-                </td>
-                <td></td>
-            </tr>
-        </table>
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                Login Form
+            </div>
+            <div class="panel-body">
+                <form class="form-group">
+                    <div class="form-inline form-group">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                @Html.LabelFor(x => x.ChatName)
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(x => x.ChatName, new { @type = "text", @class = "form-control", @placeholder = "Login" })
+                                <span class="text-danger">&nbsp;@Html.ValidationMessageFor(x => x.ChatName)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline form-group">
+                        <div class="form-group">
+                            <div class="editor-label">
+                                @Html.LabelFor(x => x.Password)
+                            </div>
+                            <div class="editor-field">
+                                @Html.PasswordFor(x => x.Password, new { @type = "password", @class = "form-control", @placeholder = "Password" })
+                                <span class="text-danger">&nbsp;@Html.ValidationMessageFor(x => x.Password)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-default" value="Login" />
+                </form>
+            </div>
+        </div>
     }
 </div>

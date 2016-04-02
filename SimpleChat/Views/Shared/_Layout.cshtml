@@ -20,18 +20,26 @@
     <div class="container">
         <div class="row">
             <div class="panel panel-primary wrapper">
-                <div class="panel-heading text-right">
+                <div class="panel-heading">
                     @if (Request.IsAuthenticated)
                     {
-                        <strong>@Html.Encode(User.Identity.Name)</strong>
-                        @Html.ActionLink("Log Out", "Logout", "Account", new { @class = "btn btn-danger" })
+                        <div class="col-md-4">
+                            <a href="@Url.Action("Index", "Chat")" class="btn btn-success">To chat</a>
+                        </div>
                     }
-                    else
-                    {
-                        @Html.ActionLink("Register", "Register", "Account", new { @class = "btn btn-info" })
-                        <span>&nbsp;</span>
-                        @Html.ActionLink("Log In", "Login", "Account", new { @class = "btn btn-success" })
-                    }
+                    <div class="text-right">
+                        @if (Request.IsAuthenticated)
+                        {
+                            <span>User:&nbsp</span><strong>@Html.Encode(User.Identity.Name)</strong>
+                            <a href="@Url.Action("Logout","Account")" class="btn btn-danger">Log Out</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Register","Account")" class="btn btn-info">Register</a>
+                            <span>&nbsp;</span>
+                            <a href="@Url.Action("Login","Account")" class="btn btn-success">Log In</a>
+                        }
+                    </div>
                 </div>
 
                 <div class="panel-body content">
